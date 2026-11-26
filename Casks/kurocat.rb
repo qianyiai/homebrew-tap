@@ -5,7 +5,7 @@ cask "kurocat" do
   url "https://github.com/qianyiai/kurocat/releases/download/v#{version}/KuroCat-v#{version}-macos-universal.dmg"
   name "KuroCat"
   desc "Minimalist open-source 3D/2D transparent desktop cat typing & AI companion"
-  homepage "https://qianyi.one/kurocat"
+  homepage "https://kurocat.org/"
 
   livecheck do
     url :url
