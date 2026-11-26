@@ -1,6 +1,6 @@
 # 🐾 Homebrew Tap for KuroCat
 
-Official Homebrew Cask tap for **[KuroCat](https://github.com/qianyiai/kurocat)** — a free, open-source 3D/2D transparent desktop cat typing, mouse & AI companion for macOS (Apple Silicon + Intel Universal, macOS 10.15+).
+Official Homebrew Cask tap for **[KuroCat](https://kurocat.org/)** ([GitHub](https://github.com/qianyiai/kurocat)) — a free, open-source 3D/2D transparent desktop cat typing, mouse & AI companion for macOS (Apple Silicon + Intel Universal, macOS 10.15+).
 
 ## Install
 
