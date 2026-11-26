@@ -1,0 +1,77 @@
+name: Sync KuroCat Latest Release
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@v4
+
+      - name: Check latest KuroCat macOS release and update Cask
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import re
+          import urllib.request
+          from pathlib import Path
+
+          API = "https://api.github.com/repos/qianyiai/kurocat/releases/latest"
+          req = urllib.request.Request(API, headers={"User-Agent": "kurocat-homebrew-tap-sync"})
+          with urllib.request.urlopen(req, timeout=30) as resp:
+              rel = json.loads(resp.read().decode("utf-8"))
+
+          tag = str(rel.get("tag_name") or "").strip()
+          if not tag.startswith("v"):
+              raise SystemExit(f"Unexpected tag_name: {tag!r}")
+          version = tag[1:]
+          expected_name = f"KuroCat-v{version}-macos-universal.dmg"
+          asset = next((a for a in rel.get("assets", []) if a.get("name") == expected_name), None)
+          if not asset:
+              print(f"Asset {expected_name} not yet uploaded for {tag}; skipping.")
+              raise SystemExit(0)
+
+          cask_path = Path("Casks/kurocat.rb")
+          text = cask_path.read_text(encoding="utf-8")
+          m_ver = re.search(r'version\s+"([^"]+)"', text)
+          current_ver = m_ver.group(1) if m_ver else ""
+          if current_ver == version:
+              print(f"Already up to date at {version}.")
+              raise SystemExit(0)
+
+          digest = str(asset.get("digest") or "")
+          if digest.startswith("sha256:") and len(digest) == 71:
+              sha256 = digest.split(":", 1)[1].lower()
+          else:
+              dl_url = asset["browser_download_url"]
+              print(f"Downloading {dl_url} to compute SHA-256...")
+              h = hashlib.sha256()
+              dreq = urllib.request.Request(dl_url, headers={"User-Agent": "kurocat-homebrew-tap-sync"})
+              with urllib.request.urlopen(dreq, timeout=180) as dresp:
+                  while chunk := dresp.read(1024 * 1024):
+                      h.update(chunk)
+              sha256 = h.hexdigest()
+
+          updated = re.sub(r'version\s+"[^"]+"', f'version "{version}"', text, count=1)
+          updated = re.sub(r'sha256\s+"[0-9a-f]{64}"', f'sha256 "{sha256}"', updated, count=1)
+          cask_path.write_text(updated, encoding="utf-8")
+          print(f"Updated Casks/kurocat.rb: {current_ver} -> {version} ({sha256})")
+          PY
+
+      - name: Commit and push if updated
+        run: |
+          git diff --quiet && exit 0
+          VER=$(grep -oP 'version "\K[^"]+' Casks/kurocat.rb)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/kurocat.rb
+          git commit -m "chore(cask): update kurocat to v${VER}"
+          git push
