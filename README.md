@@ -1,6 +1,6 @@
 # 🐾 Official Homebrew Tap for KuroCat
 
-Official Homebrew Cask tap for **[KuroCat](https://kurocat.org/)** ([GitHub](https://github.com/qianyiai/kurocat)) — a free, MIT-licensed open-source 3D/2D transparent desktop typing cat & AI coding companion for macOS (Apple Silicon M1–M4 + Intel Universal, macOS 10.15+).
+Official Homebrew Cask tap for **[KuroCat](https://kurocat.org/)** ([GitHub](https://github.com/qianyiai/KuroCat)) — a free, MIT-licensed open-source 3D/2D transparent desktop typing cat & AI coding companion for macOS (Apple Silicon M1–M4 + Intel Universal, macOS 10.15+).
 
 - **🌐 Official Website & 3D Playground**: https://kurocat.org/ ([English](https://kurocat.org/en/) · [日本語](https://kurocat.org/ja/) · [한국어](https://kurocat.org/ko/))
 - **📥 All-Platform Downloads & SHA-256**: https://kurocat.org/en/download/
@@ -12,7 +12,7 @@ Official Homebrew Cask tap for **[KuroCat](https://kurocat.org/)** ([GitHub](htt
 > [!CAUTION]
 > **Official Channels Only — Beware of Impersonator `kurocat.net`**
 >
-> The ONLY official website for KuroCat is **[`https://kurocat.org/`](https://kurocat.org/)**, alongside [`github.com/qianyiai/kurocat`](https://github.com/qianyiai/kurocat) and this Homebrew tap (`qianyiai/homebrew-tap`). Do **NOT** download files from unaffiliated domain `kurocat.net` (which distributes an unauthorized 64.25 MB padded Windows archive `KuroCat.v5.1.0.zip`). See our [Security Advisory](https://kurocat.org/en/security/) for SHA-256 verification and details.
+> The ONLY official website for KuroCat is **[`https://kurocat.org/`](https://kurocat.org/)**, alongside [`github.com/qianyiai/KuroCat`](https://github.com/qianyiai/KuroCat) and this Homebrew tap (`qianyiai/homebrew-tap`). Do **NOT** download files from unaffiliated domain `kurocat.net` (which distributes an unauthorized 64.25 MB padded Windows archive `KuroCat.v5.1.0.zip`). See our [Security Advisory](https://kurocat.org/en/security/) for SHA-256 verification and details.
 
 ## Install
 
