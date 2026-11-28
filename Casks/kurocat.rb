@@ -1,6 +1,6 @@
 cask "kurocat" do
-  version "5.1.3"
-  sha256 "2e42bb1f2701725a93b1e074bbb6694b6471821a78c341e0e8b216efcec545a9"
+  version "5.1.5"
+  sha256 "c8b678369fb444c7d9af9f1d0a84367aaa8baa22090b90a26ac6bbe5e3a55be5"
 
   url "https://github.com/qianyiai/KuroCat/releases/download/v#{version}/KuroCat-v#{version}-macos-universal.dmg"
   name "KuroCat"
